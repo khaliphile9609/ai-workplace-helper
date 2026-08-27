@@ -27,7 +27,7 @@ const NAV = [
   { to: "/settings", label: "Settings", icon: SettingsIcon },
 ] as const;
 
-function NavList({ collapsed, onNavigate }: { collapsed?: boolean; onNavigate?: () => void }) {
+function NavList({ collapsed, onNavigate }: { collapsed?: boolean | undefined; onNavigate?: (() => void) | undefined }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
@@ -56,7 +56,13 @@ function NavList({ collapsed, onNavigate }: { collapsed?: boolean; onNavigate?: 
   );
 }
 
-function SidebarInner({ collapsed, onNavigate }: { collapsed?: boolean; onNavigate?: () => void }) {
+function SidebarInner({
+  collapsed,
+  onNavigate,
+}: {
+  collapsed?: boolean | undefined;
+  onNavigate?: (() => void) | undefined;
+}) {
   return (
     <div className="flex h-full flex-col gap-6 py-5">
       <Link
